@@ -9,9 +9,9 @@ class ResourceCalendar(models.Model):
 
     is_working_day = fields.Boolean()
     # is_working_day_1 = fields.Boolean()
-    _sql_constraints = [
-        ('unique_company_calendar', 'unique(company_id)', 'Company must be unique.'),
-    ]
+    # _sql_constraints = [
+    #     ('unique_company_calendar', 'unique(company_id)', 'Company must be unique.'),
+    # ]
 
     def set_as_working_hours(self):
         for rec in self:
