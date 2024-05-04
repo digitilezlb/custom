@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_pricelist_view" model="ir.ui.view">
+            <field name="name">product.pricelist</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="is_published"/>
+                    <field name="is_promotion" invisible="1"/>
+<!--                    <field name="is_banner" invisible="1"/>-->
+<!--                    <field name="is_offer" invisible="1"/>-->
+
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="image" widget='image' style="width:40%;"
+                    />
+                </xpath>
+                <xpath expr="//field[@name='item_ids']"
+                       position="replace">
+                    <field name="item_ids">
+                        <tree>
+                            <field name="name" string="Applicable On"/>
+                            <field name="price" string="Price"/>
+                        </tree>
+                    </field>
+
+                </xpath>
+
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="item_pricelist" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='pricelist_rule_method']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='pricelist_rule_limits']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='pricelist_rule_related']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+<!--                <xpath expr="//field[@name='applied_on']" position="attributes">-->
+<!--                    <attribute name="domain">[('value', 'not in', ['promotion'])]</attribute>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+        <record id="promotions_action" model="ir.actions.act_window">
+            <field name="name">Promotions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.pricelist</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_promotion', '=', True)]</field>
+            <field name="context">{'default_is_promotion': True}</field>
+        </record>
+        <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+        <menuitem id="root_ads_promotions" name="App Promotions" parent="sale.sale_menu_root"/>
+        <menuitem id="promotions_menu_item" name="Promotions" parent="root_ads_promotions"
+                  action="promotions_action"/>
+
+<!--        <record id="banners_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Banners</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">product.pricelist</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[('is_banner', '=', True)]</field>-->
+<!--            <field name="context">{'default_is_banner': True}</field>-->
+<!--        </record>-->
+<!--        <menuitem id="banners_menu_item" name="Banners" parent="root_ads_promotions"-->
+<!--                  action="banners_action"/>-->
+
+<!--        <record id="offers_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Offers</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">product.pricelist</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[('is_offer', '=', True)]</field>-->
+<!--            <field name="context">{'default_is_offer': True}</field>-->
+<!--        </record>-->
+<!--        <menuitem id="offers_menu_item" name="Offers" parent="root_ads_promotions"-->
+<!--                  action="offers_action"/>-->
+
+        <record id="price_list_inherit_tree_view" model="ir.ui.view">
+            <field name="name">product.pricelist.tree</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="website_sale.website_sale_pricelist_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='selectable']" position="replace">
+                    <field name="is_published"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+
+
+</odoo>
+

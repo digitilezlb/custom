@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="notification_view_form" model="ir.ui.view">
+            <field name="name">notification_view_form</field>
+            <field name="model">notification.notification</field>
+            <field name="arch" type="xml">
+                <form string="notification_form">
+                    <header>
+                        <button class='oe_highlight'
+                                name="send_notification_dash"
+                                type="object"
+                                string="Send Notification" icon="fa-bell">
+                        </button>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Notification Send" bg_color="bg-info"
+                                attrs="{'invisible': [('is_send', '=', False)]}"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="current_date"/>
+                            <field name="is_send" invisible="1"/>
+                            <field name="image" widget='image' style="width:40%;"/>
+                        </group>
+                        <group>
+                            <field name="customer_type" widget="radio"/>
+
+                            <field name="customers"
+                                   attrs="{'invisible': [('customer_type', '!=', '2')]}"/>
+                            <field name="products"
+                                   attrs="{'invisible': [('customer_type', '!=', '3')]}"/>
+                            <field name="zones"
+                                   attrs="{'invisible': [('customer_type', '!=', '4')]}"/>
+                        </group>
+
+                        <group>
+                            <field name="notification_type" widget="radio"/>
+
+                            <field name="promotion"
+                                   attrs="{'invisible': [('notification_type', '!=', 'promo')]}"/>
+                            <field name="category"
+                                   attrs="{'invisible': [('notification_type', '!=', 'cat')]}"/>
+                            <field name="platdejour"
+                                   attrs="{'invisible': [('notification_type', '!=', 'plat')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="notification_action" model="ir.actions.act_window">
+            <field name="name">Notification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">notification.notification</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="notifications_menu_retailers" name="Notifications" action="notification_action"/>
+
+
+
+    </data>
+</odoo>

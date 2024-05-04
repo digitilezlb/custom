@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="type1" model="mobile.platform">
+            <field name="name">Android</field>
+        </record>
+        <record id="type2" model="mobile.platform">
+            <field name="name">IOS</field>
+        </record>
+    </data>
+</odoo>
