@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="company_information_view" model="ir.ui.view">
+            <field name="name">Companies</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <group string="Information">
+                        <field name="terms_and_conditions"/>
+                        <field name="privacy_policy"/>
+                        <field name="support"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

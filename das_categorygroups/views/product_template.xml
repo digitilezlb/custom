@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_template_groups_form_inherit" model="ir.ui.view">
+            <field name="name">product.template</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Complementary Products">
+                        <group>
+                            <group>
+<!--                                <field name="drinks_caption"/>-->
+                                <field name="drinks_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
+<!--                                <field name="sides_caption"/>-->
+                                <field name="sides_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+<!--                                <field name="related_caption"/>-->
+                                <field name="related_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
+<!--                                <field name="liked_caption"/>-->
+                                <field name="liked_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
+<!--                                <field name="desserts_caption"/>-->
+                                <field name="desserts_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_product_groups_form_inherit12345" model="ir.ui.view">
+            <field name="name">product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <header>
+                        <button name="set_as_default" string="Default" type="object" class="btn-primary"/>
+                    </header>
+                <xpath expr="//notebook" position="inside">
+
+                    <page string="Complementary Products">
+                        <group>
+                            <group>
+<!--                                <field name="drinks_caption"/>-->
+                                <field name="drinks_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
+<!--                                <field name="sides_caption"/>-->
+                                <field name="sides_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+<!--                                <field name="related_caption"/>-->
+                                <field name="related_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
+<!--                                <field name="liked_caption"/>-->
+                                <field name="liked_ids" widget="many2many_tags" options="{'no_create': True}"/>
+
+<!--                                <field name="desserts_caption"/>-->
+
+                                <field name="desserts_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_product_variant_tree_default" model="ir.ui.view">
+        <field name="name">add default</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <field name="product_template_variant_value_ids" position="after">
+                <field name="default" />
+            </field>
+        </field>
+    </record>
+
+    </data>
+</odoo>

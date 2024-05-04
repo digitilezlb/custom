@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_category_inherit_form" model="ir.ui.view">
+            <field name="name">product.category</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="before">
+                    <field name="company_id"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Drinks">
+                            <field name="drinks_ids"/>
+                        </page>
+
+                        <page string="Sides">
+                            <field name="sides_ids"/>
+                        </page>
+
+                        <page string="Related Products">
+                            <field name="related_ids"/>
+                        </page>
+
+                        <page string="Liked Products">
+                            <field name="liked_ids"/>
+                        </page>
+
+                         <page string="Desserts Products">
+                            <field name="desserts_ids"/>
+                        </page>
+
+                    </notebook>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
