@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+
+         <function model="digitile.order.kitchen" name="create_trigger"/>
+        <function model="digitile.order.kitchen.line" name="create_trigger"/>
+
+
+    </data>
+
+
+</odoo>
+

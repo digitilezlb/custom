@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_open_chefs_role" model="ir.actions.act_window">
+        <field name="name">Chefs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_chef','=', True)]</field>
+        <field name="context">{'default_is_chef': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Chef !
+            </p>
+        </field>
+    </record>
+    <menuitem id="chef_menu_items" name="Chefs" action="action_open_chefs_role" parent="das_delivery_system.chef_menu_item"/>
+
+    <record id="view_partner_chef_form_inherit" model="ir.ui.view">
+        <field name="name">chef.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[@name='contact_addresses']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_chef', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[@name='sales_purchases']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_chef', '=', True)]}</attribute>
+            </xpath>
+<!--            <xpath expr="//notebook/page[@name='accounting']" position="attributes">-->
+<!--                <attribute name="attrs">{'invisible':[('is_chef', '=', True)]}</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_chef', '=', True)]}</attribute>
+            </xpath>
+
+          
+            <xpath expr="//notebook/page[1]" position="before">
+                <page string="Chef Information" name="chef_information"
+                      default_focus="1" attrs="{'invisible': [('is_chef', '=', False)]}">
+                    <group>
+                        <group string="Private Information">
+                            <field name="is_chef" invisible="1"/>
+                            <field name="kitchen_id" attrs="{'required': [('is_chef', '=', True)]}"/>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="chef_search" model="ir.ui.view">
+        <field name="name">chef.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Chefs" name="member" domain="[('is_chef','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
