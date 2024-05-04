@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="map_overview" model="zone.zone.map">
+            <field name="name">Map</field>
+        </record>
+
+    </data>
+</odoo>

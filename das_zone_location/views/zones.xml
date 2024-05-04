@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="zone_view_form" model="ir.ui.view">
+            <field name="name">zone_view_form</field>
+            <field name="model">zone.zone</field>
+            <field name="arch" type="xml">
+                <form string="zone_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="marker_color" widget="google_marker_picker"/>
+                            </group>
+                             <group>
+                                <field name="company_id"/>
+<!--                                <field name="delivery_fees" attrs="{'invisible': [('show_fee', '=', False)]}"/>-->
+<!--                                <field name="show_fee" invisible="1"/>-->
+                                
+<!--                                <field name="delivery_time" attrs="{'invisible': [('show_time', '=', False)]}"/>-->
+<!--                                <field name="show_time" invisible="1" />-->
+                            </group>
+                            <button name="create_draw_map" string="Draw Zone" type="object"
+                                    class="btn-primary" style="margin-left:90%;width:10%"
+                                    context="{'default_zone_id': id}"
+                            />
+                        </group>
+                        <field name="get_drawing"/>
+                        <notebook>
+                            <page string="Areas">
+                                <field name="zones_lines"/>
+                            </page>
+                            <!--<page string="Route">-->
+                            <!--    <field name="route_id">-->
+                            <!--        <tree>-->
+                            <!--            <field name="name"/>-->
+                            <!--            <field name="driver_id"/>-->
+                            <!--            <field name="street_ids" widget="many2many_tags"/>-->
+                            <!--        </tree>-->
+                            <!--    </field>-->
+                            <!--</page>-->
+                            <page string="Geolocation">
+                                <!--                                <field name="get_map"/>-->
+
+                                <!--                                <field name="get_geo_lines"/>-->
+                                <!--                                <div style="margin-left:75%">-->
+                                <!--                                    <button name="create_geo_lines" string="Import Geolocation" type="object"-->
+                                <!--                                            class="btn-primary"/>-->
+                                <!--                                    <button name="remove_geolocation" string="Remove Geolocation" type="object"-->
+                                <!--                                            class="btn-primary" style="margin-left:10%"/>-->
+                                <!--                                    <br/>-->
+                                <!--                                </div>-->
+                                <field name="geo_id" readonly="1">
+                                    <tree multi_edit="1" sample="1" editable="bottom">
+                                        <field name="latitude" digits="[16,16]"/>
+                                        <field name="longitude" digits="[16,16]"/>
+                                    </tree>
+                                </field>
+                            </page>
+<!--                            <page string="Surveyors" invisible="1">-->
+<!--                                <field name="surveyors" readonly="1"/>-->
+<!--                            </page>-->
+<!--                            <page string="Surveyors" readonly="1">-->
+<!--                                <field name="get_surveyors" readonly="1"/>-->
+<!--                            </page>-->
+                            <!--<page string="Retailer">-->
+                            <!--    <field name="get_retailer" readonly="1"/>-->
+                            <!--</page>-->
+<!--                            <page string="Drivers">-->
+<!--                                <field name="get_drivers" readonly="1"/>-->
+<!--                            </page>-->
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="zone_lines_view_form" model="ir.ui.view">
+            <field name="name">zone_lines_view_form</field>
+            <field name="model">zone.lines</field>
+            <field name="arch" type="xml">
+                <form string="zone_lines_form">
+                    <sheet>
+                        <group>
+                            <field name="state"/>
+                            <field name="city"/>
+                            <!--                            <field name="street"/>-->
+                        </group>
+                        <notebook>
+                            <page string="Streets">
+                                <field name="streets"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="zone_lines_view_tree" model="ir.ui.view">
+            <field name="name">zone_lines_view_tree</field>
+            <field name="model">zone.lines</field>
+            <field name="arch" type="xml">
+                <tree string="zone_lines_tree">
+                    <field name="state"/>
+                    <field name="city"/>
+                    <field name="streets" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <record id="zone_map_kanban" model="ir.ui.view">
+            <field name="name">Zone</field>
+            <field name="model">zone.zone</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="get_drawing"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div>
+                                <field name="get_drawing" widget="html"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="zones_view_tree" model="ir.ui.view">
+            <field name="name">zones_view_tree</field>
+            <field name="model">zone.zone</field>
+            <field name="arch" type="xml">
+                <tree string="zones_tree">
+                    <field name="name"/>
+                    <field name="company_id"/>
+<!--                    <field name="delivery_fees" />-->
+
+<!--                    <field name="delivery_time" />-->
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="zones_tree_action" model="ir.actions.act_window">
+            <field name="name">Zone</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">zone.zone</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="zone_menu_items" name="Zones" action="zones_tree_action"
+                  web_icon="das_zone_location,static/description/zone.png"/>
+
+
+        <record id="state_city_inherit" model="ir.ui.view">
+            <field name="name">res.country.state</field>
+            <field name="model">res.country.state</field>
+            <field name="inherit_id" ref="base.view_country_state_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+                    <notebook>
+                        <page string="City">
+                            <group>
+                                <field name="location_latitude"/>
+                                <field name="location_longitude"/>
+                            </group>
+                            <field name="city_ids">
+                                <form>
+                                    <field name="name"/>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="state_view_form" model="ir.ui.view">
+            <field name="name">state_view_form</field>
+            <field name="model">state.city</field>
+            <field name="arch" type="xml">
+                <form string="state_form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="state_id"/>
+                            <field name="location_latitude"/>
+                            <field name="location_longitude"/>
+                        </group>
+                        <notebook>
+                            <page string="Streets">
+                                <field name="street_ids">
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="city_view_tree" model="ir.ui.view">
+            <field name="name">city_view_tree</field>
+            <field name="model">state.city</field>
+            <field name="arch" type="xml">
+                <tree string="city_tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="city_action" model="ir.actions.act_window">
+            <field name="name">City</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">state.city</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="city_menu_item" name="Cities" parent="zone_menu_items" action="city_action"/>
+
+        <record id="street_view_form" model="ir.ui.view">
+            <field name="name">street_view_form</field>
+            <field name="model">city.street</field>
+            <field name="arch" type="xml">
+                <form string="street_form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="name_ar"/>
+                            <field name="city_id"/>
+                            <field name="state"/>
+                            <field name="location_latitude"/>
+                            <field name="location_longitude"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="street_view_tree" model="ir.ui.view">
+            <field name="name">street_view_tree</field>
+            <field name="model">city.street</field>
+            <field name="arch" type="xml">
+                <tree string="street_tree">
+                    <field name="name"/>
+                    <field name="name_ar"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="streets_action" model="ir.actions.act_window">
+            <field name="name">Streets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">city.street</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="street_menu_item" name="Streets" parent="zone_menu_items" action="streets_action"/>
+        <menuitem id="contacts.menu_country_partner"
+                  action="base.action_country" parent="zone_menu_items"
+        />
+        <record id="state_view_tree" model="ir.ui.view">
+            <field name="name">state_view_tree</field>
+            <field name="model">res.country.state</field>
+            <field name="arch" type="xml">
+                <tree string="state_tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="state_action" model="ir.actions.act_window">
+            <field name="name">States</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country.state</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="state_view_tree"/>
+        </record>
+        <menuitem id="contacts.menu_country_state_partner"
+                  action="state_action"
+                  parent="zone_menu_items"
+                  name="States"
+        />
+
+        <record id="overview_zone_map" model="ir.ui.view">
+            <field name="name">zone.zone.map</field>
+            <field name="model">zone.zone.map</field>
+            <field name="arch" type="xml">
+                <kanban create="0" edit="0">
+                    <field name="map"/>
+                    <templates>
+                      
+                        <t t-name="kanban-box">
+                           <div class="o_kanban_record_has_image_fill o_res_partner_kanban w-100">
+                                <field name="map" widget="html"/>
+                            </div>
+                        </t>
+                      
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+       <record id="zone_map_view_form" model="ir.ui.view">
+            <field name="name">zone_map_view_form</field>
+            <field name="model">zone.zone.map</field>
+            <field name="arch" type="xml">
+                <form string="zone_map_form">
+                    <sheet>
+                        <field name="map"/>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="overview_map_action" model="ir.actions.act_window">
+            <field name="name">Zones Map</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">zone.zone.map</field>
+            <field name="res_id">1</field>
+            <field name="view_mode">form</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="zones_map_overview" name="Zones Map" parent="zone_menu_items" action="overview_map_action"
+                  sequence="1"/>
+        <record id="zone_zone_route_view_form" model="ir.ui.view">
+            <field name="name">zone_zone_route_view_form</field>
+            <field name="model">zone.zone.route</field>
+            <field name="arch" type="xml">
+                <form string="zone_zone_route_form">
+                    <sheet>
+                        <h1>
+                            <field name="name" placeholder="Route Name"/>
+                        </h1>
+                        <group>
+                            <field name="driver_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Streets">
+                                <field name="street_ids" style="width:50%">
+                                    <tree>
+                                        <field name="sequence" widget="handle" style="width:1%"/>
+
+                                        <field name="name" style="width:20%"/>
+                                    </tree>
+                                </field>
+                                <div style="text-align:right;" class="o_group_col_12">
+                                    <div style="width:50%;height:100%;">
+                                        <field name="tracking_iframe"/>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

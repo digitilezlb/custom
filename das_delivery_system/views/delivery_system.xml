@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="delivery_system_menu_item" name="Delivery System"/>
+        <menuitem id="manager_menu_item" name="Managers" parent="delivery_system_menu_item"/>
+        <menuitem id="chef_menu_item" name="Chefs" parent="delivery_system_menu_item"/>
+        <menuitem id="driver_menu_item" name="Drivers" parent="delivery_system_menu_item"/>
+
+
+    </data>
+</odoo>

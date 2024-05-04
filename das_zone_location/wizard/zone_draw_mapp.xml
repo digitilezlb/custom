@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="zone_draw_map_view_form" model="ir.ui.view">
+            <field name="name">zone_draw_map_view_form</field>
+            <field name="model">zone.draw.map</field>
+            <field name="arch" type="xml">
+                <form string="zone_draw_map_form" create="0" edit="0">
+                    <field name="get_map"/>
+                    <field name="zone_id" invisible="1"/>
+
+                    <footer/>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

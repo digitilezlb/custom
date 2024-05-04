@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="company_time_form_inherit" model="ir.ui.view">
+            <field name="name">res.company</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Delivery Time">
+                        <group>
+                            <group>
+                                <field name="time_type" widget="radio" />
+                            </group>
+                             <group style="width:50%">
+                                <table style="width:30vw">
+                                    <tr >
+                                        <td style="width:25%">
+                                            <label for="fixed_time" attrs="{'invisible': [('time_type', '!=', 'fixed')]}"/>
+                                        </td>
+                                        <td colspan="3" style="width:75%">
+                                            <field name="fixed_time" attrs="{'invisible': [('time_type', '!=', 'fixed')]}"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr >
+                                        <td colspan="4" style="width:100%">
+
+                                                <span attrs="{'invisible': [('time_type', '!=', 'by_zone')]}">To determine the delivery time for the zones, kindly provide the cost for each area within the zone model.</span>
+
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+
+                            </group>
+
+                        </group>
+                    </page>
+                    <!--<page string="Order Settings">-->
+                    <!--     <group>-->
+                    <!--            <field name="has_delivery"   />-->
+                    <!--            <field name="has_pickup"   />-->
+                    <!--        </group>-->
+                    <!-- </page>-->
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

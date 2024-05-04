@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<style>
+			/* Set the size of the div element that contains the map */
+			#map {
+			height: 500px;  /* The height is 400 pixels */
+			width: 100%;  /* The width is the width of the web page */
+			}
+		</style>
+	</head>
+	<body >
+		<div id="map" width="100%"></div>
+		<script>
+			function drawMap(result){
+				var map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 33.88780537872068 , lng: 35.50227266317284},
+					zoom: 8.5
+				});
+
+				if(result !== null){
+					let coordinates = result.result.response;
+					var data=[];
+
+					coordinates.map((coordinate) => {
+						data.push({lat: coordinate.latitude, lng: coordinate.longitude});
+					});
+
+					let ids = coordinates.map(o => o.id);
+					let zones = coordinates.filter(({id}, index) => !ids.includes(id, index + 1));
+					zones.map((zone)=> {
+						data = [];
+						zone_coords = coordinates.filter(coords => coords.id == zone.id);
+						let color = zone_coords[0].color;
+						let name = zone_coords[0].name;
+
+						zone_coords.map((coordinate) => {
+							data.push({lat: coordinate.latitude, lng: coordinate.longitude});
+						});
+
+						let polygon = new google.maps.Polygon({
+							map,
+							paths: data,
+							strokeColor: color,
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: color,
+							fillOpacity: 0.35,
+							content: name,
+							geodesic: true,
+						});
+
+						new google.maps.Marker({
+							position: data[0],
+							map,
+							title: name,
+						});
+
+					});
+				}
+				map.data.setMap(map);
+			}
+
+			function initMap(){
+				let zoneId = (document.location.href).substr((document.location.href).indexOf("?")+1);
+				let baseURL = (document.location.href).substr(0,(document.location.href).indexOf("/das_zone_location"));
+				let myHeaders = new Headers();
+					myHeaders.append("Content-Type", "application/json");
+					myHeaders.append("Cookie", "session_id=de67c3cd7c51a261b277e45f4a8b659f8b847303");
+				let raw = JSON.stringify({});
+				let requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				fetch(baseURL+"/api/all-zones", requestOptions)
+					.then((response) => response.json())
+					.then((result) => {drawMap(result);});
+			}
+
+		</script>
+		<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAszKHeYYSkYMtOvKezIgF5--u7gLkfSog&loading=async&callback=initMap"></script>
+	</body>
+</html>

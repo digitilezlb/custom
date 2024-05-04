@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="zone_inherit" model="ir.ui.view">
+            <field name="name">Contacts</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//group" position="inside">
+
+                    <group string="Address Details">
+                        <field name="country_id"/>
+                        <field name="state_id"/>
+                        <field name="city_id"/>
+                        <field name="street_id"/>
+                        <field name="is_client"/>
+                    <!--<field name="street2" string="Near"/>-->
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']/form/sheet/group"
+                       position="replace">
+                    <group>
+                        <field name="country_id"/>
+                        <field name="state_id"/>
+                        <field name="city_id"/>
+                        <field name="street_id"/>
+                        <!--<field name="street2" string="Near"/>-->
+                        <field name="is_client"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

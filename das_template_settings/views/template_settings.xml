@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="template_settings_menu_item" name="Website Settings"/>
+         <menuitem id="users_companies_menu_item" name="Users &amp; Companies" parent="template_settings_menu_item" sequence="1"/>
+        <menuitem id="main_banner_menu_item" name="Main Banners" parent="template_settings_menu_item" sequence="2"/>
+        <menuitem id="main_section_menu_item" name="Main Sections" parent="template_settings_menu_item" sequence="3"/>
+        <menuitem id="about_us_menu_item" name="About Us" parent="template_settings_menu_item" sequence="4"/>
+        <menuitem id="team_menu_item" name="Team" parent="template_settings_menu_item" sequence="5"/>
+        <menuitem id="contact_us_item" name="Contact Us" parent="template_settings_menu_item" sequence="6"/>
+        <menuitem id="driver_chat_item" name="Driver Chat" parent="template_settings_menu_item" sequence="7"/>
+        <menuitem id="website_faq_item" name="FAQ" parent="template_settings_menu_item" sequence="8"/>
+        <menuitem id="career_information_item" name="Career Website Information" parent="template_settings_menu_item" sequence="9"/>
+        <menuitem id="das_captions_item" name="Captions" parent="template_settings_menu_item" sequence="10"/>
+        <menuitem id="customer_feedback_menu_item" name="Customers Feedback" parent="template_settings_menu_item" sequence="11"/>
+        <menuitem id="working_times_menu_item" name="Working Times" parent="template_settings_menu_item" sequence="12"/>
+<!--        <menuitem id="das_menu_menu_menu_item" name="Menu" parent="template_settings_menu_item" sequence="13"/>-->
+
+
+
+        <menuitem id="template_users_form" action="das_user_secure.all_users_action_res_users" name="Users" parent="users_companies_menu_item" sequence="1"/>
+        <menuitem id="template_companies_form" action="base.action_res_company_form" name="Companies" parent="users_companies_menu_item" sequence="2"/>
+        <menuitem id="template_currency_form" action="base.action_currency_form" name="Currencies" parent="users_companies_menu_item" sequence="3"/>
+    </data>
+</odoo>

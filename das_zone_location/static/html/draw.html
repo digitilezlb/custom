@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>Drawing tools</title>
+    	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+   	 	<meta charset="utf-8">
+
+    	<style>
+      		/* Always set the map height explicitly to define the size of the div
+       		* element that contains the map. */
+      		#map {
+        		height: 90%;
+      		}
+     		/* Optional: Makes the sample page fill the window. */
+      		html, body {
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+      		}
+			#save {
+				background: none padding-box rgb(255, 255, 255);
+				display: table-cell;
+				padding: 16px;
+				color: rgb(86, 86, 86);
+				height:40px;
+				font-family: Roboto, Arial, sans-serif;
+				font-size: 18px;
+				border-radius: 3px;
+				box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+				border:0px;
+				cursor:pointer;
+				font-weight:500;
+				line-height:10px;
+				width:170px;
+			}
+
+			#save:hover{
+				background-color: #EBEBEB;
+			}
+    	</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<div id="geojson"  style="position: fixed; bottom: 25%; left: 5%; color:red;"></div>
+		<div style="position: fixed; bottom: 15%; left: 0.7%;">
+			<input id="save" value="GetCoordinates" type="button" />
+		</div>
+	</body>
+
+  	<script>
+			function drawMap(result,baseURL){
+				var map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 33.88780537872068 , lng: 35.50227266317284},
+					zoom: 8.75
+				});
+
+				if(result !== null){
+					let coordinates = result.result.response;
+					var data=[];
+
+					coordinates.map((coordinate) => {
+						data.push({lat: coordinate.latitude, lng: coordinate.longitude});
+					});
+
+					let ids = coordinates.map(o => o.id);
+					let zones = coordinates.filter(({id}, index) => !ids.includes(id, index + 1));
+					zones.map((zone)=> {
+						data = [];
+						zone_coords = coordinates.filter(coords => coords.id == zone.id);
+						let color = zone_coords[0].color;
+						let name = zone_coords[0].name;
+
+						zone_coords.map((coordinate) => {
+							data.push({lat: coordinate.latitude, lng: coordinate.longitude});
+						});
+
+						let polygon = new google.maps.Polygon({
+							map,
+							paths: data,
+							strokeColor: color,
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							fillColor: color,
+							fillOpacity: 0.35,
+							content: name,
+							geodesic: true,
+						});
+
+						new google.maps.Marker({
+							position: data[0],
+							map,
+							title: name,
+						});
+
+					});
+				}
+
+				map.data.setStyle({
+					strokeColor: "red",
+					strokeWeight: 1,
+					editable: true,
+					draggable: false,
+				});
+
+				var drawingManager = new google.maps.drawing.DrawingManager({
+					drawingMode: google.maps.drawing.OverlayType.POLYGON,
+					drawingControl: true,
+					drawingControlOptions: {
+						position: google.maps.ControlPosition.TOP_CENTER,
+						drawingModes: [
+							google.maps.drawing.OverlayType.POLYGON,
+						],
+					}
+				});
+
+				drawingManager.setMap(map);
+
+				google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event){
+					switch (event.type) {
+						case google.maps.drawing.OverlayType.POLYGON:
+							map.data.add(new google.maps.Data.Feature({
+								geometry: new google.maps.Data.Polygon([event.overlay.getPath().getArray()])
+							}));
+							break;
+					}
+				});
+
+
+				document.getElementById('save').addEventListener('click', function(){
+					map.data.toGeoJson(function(obj){
+						let data = JSON.stringify(obj);
+						data = JSON.parse(data);
+						console.log(data.features[0].geometry);
+
+						let zoneId = (document.location.href).substr((document.location.href).indexOf("?")+1);
+
+						let myHeaders = new Headers();
+							myHeaders.append("Content-Type", "application/json");
+							myHeaders.append("Cookie", "session_id=0fcfccc90da3e746054343951d6f31abd888d62e");
+
+						let raw = JSON.stringify(data.features[0].geometry);
+						let requestOptions = {
+							method: 'POST',
+							headers: myHeaders,
+							body: raw,
+							redirect: 'follow'
+						};
+
+						fetch(baseURL +"/api/"+zoneId+"/create-zone-coord", requestOptions)
+							.then(response => response.text())
+							.then(result => console.log(result))
+							.catch(error => console.log('error', error));
+
+						document.getElementById('geojson').innerHTML = "Map Drawed";
+						setTimeout(function(){
+							document.getElementById('geojson').innerHTML = "";
+						},1000);
+
+					});
+				})
+				
+		
+			}
+			
+			
+			function initMap() {
+			  let baseURL = (document.location.href).substr(0,(document.location.href).indexOf("/das_zone_location"));
+					
+				let myHeaders = new Headers();
+					myHeaders.append("Content-Type", "application/json");
+					myHeaders.append("Cookie", "session_id=de67c3cd7c51a261b277e45f4a8b659f8b847303");
+				let raw = JSON.stringify({});
+				let requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+				fetch(baseURL+"/api/all-zones", requestOptions)
+					.then((response) => response.json())
+					.then((result) => {drawMap(result,baseURL);});
+			}
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAszKHeYYSkYMtOvKezIgF5--u7gLkfSog&loading=async&libraries=drawing&callback=initMap"></script>
+
+</html>

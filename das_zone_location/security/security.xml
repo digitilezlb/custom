@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <record id="module_zone" model="ir.module.category">
+        <field name="name">Zone</field>
+        <field name="description">Category For Zones</field>
+    </record>
+
+    <record id="group_zone_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="das_zone_location.module_zone"/>
+    </record>
+
+    <record id="group_zone_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="das_zone_location.module_zone"/>
+        <field name="implied_ids" eval="[(4, ref('group_zone_user'))]"/>
+    </record>
+
+</odoo>
