@@ -6,9 +6,10 @@
     "author": "Das360",
     "depends": ["sale_management",  "mrp", "das_digitile","das_template_settings",
                 "das_publicfunction","das_delivery_system",
-                "das_delivery_item","das_delivery_time",
-                "das_user_notification","das_car_driver_ok",
-                "das_orders_trip",
+
+                # "das_delivery_item","das_delivery_time",
+                # "das_user_notification","das_car_driver_ok",
+                # "das_orders_trip",
 
                 # "das_images_attachment","das_sign_u_module",
                 # "das_categorygroups", "das_company_informations",
