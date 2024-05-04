@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="kitchen_view_form" model="ir.ui.view">
+            <field name="name">kitchen_view_form</field>
+            <field name="model">digitile.kitchen</field>
+            <field name="arch" type="xml">
+                <form string="contact_us_view_form" >
+                     <header>
+                        <button name="set_as_default" string="Set as Default" type="object" class="btn-primary"
+                        attrs="{'invisible': [('default_kitchen', '=',True)]}"/>
+                        <button name="un_set_default" string="Unset Default" type="object" class="btn-primary"
+                                attrs="{'invisible': [('default_kitchen', '=',False)]}"/>
+                        <button name="set_as_ready" string="Set as Ready" type="object" class="btn-primary"
+                                attrs="{'invisible': [('ready_kitchen', '=',True)]}"/>
+                        <button name="un_set_ready" string="Unset Ready" type="object" class="btn-primary"
+                                attrs="{'invisible': [('ready_kitchen', '=',False)]}"/>
+
+                    </header>
+                     <sheet>
+                         <group>
+                             <group>
+                                <field name="name"/>
+                                <field name="company_id"/>
+                                <field name="default_kitchen"/>
+                                <field name="ready_kitchen"/>
+                            </group>
+
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="kitchen_view_tree" model="ir.ui.view">
+            <field name="name">kitchen_view_tree</field>
+            <field name="model">digitile.kitchen</field>
+            <field name="arch" type="xml">
+                <tree string="kitchen_tree">
+
+                    <field name="name"/>
+
+                    <field name="company_id"/>
+                    <field name="default_kitchen"/>
+                    <field name="ready_kitchen"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="kitchen_action" model="ir.actions.act_window">
+            <field name="name">Kitchen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">digitile.kitchen</field>
+
+
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="kitchen_menu_item" name="kitchens" parent="sale.product_menu_catalog" action="kitchen_action"/>
+
+
+    </data>
+</odoo>
+
+

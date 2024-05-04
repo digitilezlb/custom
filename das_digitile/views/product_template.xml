@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_template_kitchen_form_inherit" model="ir.ui.view">
+            <field name="name">product.template</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Kitchen">
+                        <group>
+                            <group>
+                                <field name="kitchen_id" options="{'no_create': False, 'no_create_edit': True}"/>
+                                <field name="preparing_time"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Add Ons">
+                        <group>
+                            <group>
+                                <field name="is_combo" invisible="1"/>
+                                <!--<field name="content_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,False)],'required': [('is_combo', '=', True)]}" options="{'no_create': True}"/>-->
+                                <field name="product_addons_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,True)]}"  options="{'no_create': True}"/>
+                                <field name="ingredient_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,True)]}" options="{'no_create': True}"/>
+                                <field name="removable_ingredient_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,True)]}" 
+                                       options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_template_form_inherit123" model="ir.ui.view">
+            <field name="name">product.template</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="is_add_ons"/>
+                        <label for="is_add_ons"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_ingredient"/>
+                        <label for="is_ingredient"/>
+                    </span>
+                     <span class="d-inline-block">
+                        <field name="is_combo"/>
+                        <label for="is_combo"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_product_form_inherit12345" model="ir.ui.view">
+            <field name="name">product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Kitchen">
+                        <group>
+                            <group>
+                                <field name="kitchen_id" options="{'no_create': False, 'no_create_edit': True}"/>
+                                <field name="preparing_time"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+
+                    <page string="Add Ons">
+                        <group>
+                            <group>
+                                <field name="is_combo" invisible="1"/>
+                                <!--<field name="content_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,False)],'required': [('is_combo', '=', True)]}" options="{'no_create': True}"/>-->
+                                <field name="product_addons_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,True)]}"  options="{'no_create': True}"/>
+                                <field name="ingredient_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,True)]}"  options="{'no_create': True}"/>
+                                <field name="removable_ingredient_ids" widget="many2many_tags" attrs="{'invisible':[('is_combo','=' ,True)]}"  
+                                       options="{'no_create': True}"/>
+                            </group>
+                        </group>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

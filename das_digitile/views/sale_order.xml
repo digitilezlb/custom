@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="sale_order_kanban_group_bye" model="ir.ui.view">
+            <field name="name">sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <group>
+                        <field name="order_status"/>
+                        <field name="call_function" invisible="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sale_order_search_inherit" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter string="Order Status" name="order_status" context="{'group_by': 'order_status'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_kanban_view_group_by_status" model="ir.ui.view">
+            <field name="name">sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="order_status" create="0">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="amount_total"/>
+                    <field name="date_order"/>
+                    <field name="state"/>
+                    <field name="currency_id"/>
+                    <field name="activity_state"/>
+                    <progressbar field="activity_state"
+                                 colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_record_top mb16">
+                                    <div class="o_kanban_record_headings mt4">
+                                        <strong class="o_kanban_record_title">
+                                            <span t-out="record.partner_id.value"/>
+                                        </strong>
+                                    </div>
+                                    <strong>
+                                        <field name="amount_total" widget="monetary"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left text-muted">
+                                        <span>
+                                            <t t-out="record.name.value"/>
+                                            <t t-out="record.date_order.value"/>
+                                        </span>
+                                        <field name="activity_ids" widget="kanban_activity"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="state" widget="label_selection"
+                                               options="{'classes': {'draft': 'default', 'cancel': 'default', 'done': 'success'}}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    </data>
+</odoo>

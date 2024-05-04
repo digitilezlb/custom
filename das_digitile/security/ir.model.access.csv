@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_digitile_kitchen,digitile.kitchen,model_digitile_kitchen,,1,1,1,1
+access_sale_order_type,sale.order.type,model_sale_order_type,,1,1,1,1

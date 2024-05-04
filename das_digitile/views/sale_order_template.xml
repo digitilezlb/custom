@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                     <field name="delivery_date"/>
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="after">
+                     <!--<field name="sale_order_type_id" options="{'no_create': True, 'no_create_edit': True}"/>-->
+                     <field name="sale_order_type"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                     <field name="notes"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
