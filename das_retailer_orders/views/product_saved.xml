@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!--<record id="product_saved_tree_view" model="ir.ui.view">-->
+        <!--    <field name="name">ProjectName.product_saved.tree</field>-->
+        <!--    <field name="model">product.saved</field>-->
+        <!--    <field name="arch" type="xml">-->
+        <!--        <tree string="Saved For Later" multi_edit="1" sample="1" editable="bottom" create="0" edit="0">-->
+        <!--            <field name="partner_id"/>-->
+        <!--            <field name="product_id"/>-->
+        <!--        </tree>-->
+        <!--    </field>-->
+        <!--</record>-->
+        <!--<record id="product_saved_action" model="ir.actions.act_window">-->
+        <!--    <field name="name">Product Saved For Later</field>-->
+        <!--    <field name="type">ir.actions.act_window</field>-->
+        <!--    <field name="res_model">product.saved</field>-->
+        <!--    <field name="view_mode">tree</field>-->
+        <!--</record>-->
+
+        <!--<menuitem name="Product Saved" id="product_saved_menu" action="product_saved_action"/>-->
+        <!--<record id="account_move1_view" model="ir.ui.view">-->
+        <!--    <field name="name">Invoices</field>-->
+        <!--    <field name="model">account.move</field>-->
+        <!--    <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--    <field name="arch" type="xml">-->
+        <!--        <xpath expr="//group" position="inside">-->
+        <!--            <field name="attachment_id" invisble="1"/>-->
+        <!--        </xpath>-->
+        <!--    </field>-->
+        <!--</record>-->
+        
+        <!--  <record id="your_module_api_route" model="ir.http">-->
+        <!--    <field name="name">your_module_api_route</field>-->
+        <!--    <field name="type">route</field>-->
+        <!--    <field name="route">/api/all-products-public-http</field>-->
+        <!--    <field name="auth">none</field>-->
+        <!--</record>-->
+
+    </data>
+</odoo>

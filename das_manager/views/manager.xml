@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_open_managers_role" model="ir.actions.act_window">
+        <field name="name">Managers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_manager','=', True)]</field>
+        <field name="context">{'default_is_manager': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Manager !
+            </p>
+        </field>
+    </record>
+    <menuitem id="manager_menu_items" name="Managers" action="action_open_managers_role" parent="das_delivery_system.manager_menu_item"/>
+
+    <record id="view_partner_manager_form_inherit" model="ir.ui.view">
+        <field name="name">manager.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page[@name='contact_addresses']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_manager', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[@name='sales_purchases']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_manager', '=', True)]}</attribute>
+            </xpath>
+<!--            <xpath expr="//notebook/page[@name='accounting']" position="attributes">-->
+<!--                <attribute name="attrs">{'invisible':[('is_manager', '=', True)]}</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_manager', '=', True)]}</attribute>
+            </xpath>
+
+
+            <xpath expr="//notebook/page[1]" position="before">
+                <page string="Manager Information" name="manager_information"
+                      default_focus="1" attrs="{'invisible':1}">
+                    <group>
+                        <group string="Private Information">
+                            <field name="is_manager" invisible="1"/>
+
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="manager_search" model="ir.ui.view">
+        <field name="name">manager.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Managers" name="manager" domain="[('is_manager','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

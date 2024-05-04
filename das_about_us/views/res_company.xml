@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="company_fees_form_inherit" model="ir.ui.view">
+            <field name="name">res.company</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="About Us">
+                        <group>
+                            <group>
+                                <field name="about_us_banner"  widget='image' style="width:40%;"/>
+                            </group>
+                        </group>
+                        <group>
+
+                            <group>
+                               <field name="links" widget="radio" />
+                            </group>
+                            <group style="width:50%">
+                                <table style="width:30vw">
+                                    <tr >
+                                        <td style="width:25%">
+                                            <label for="video_url" attrs="{'invisible': [('links', '!=', 'video')]}"/>
+                                        </td>
+                                        <td colspan="3" style="width:75%">
+                                            <field name="video_url" widget="url" attrs="{'invisible': [('links', '!=', 'video')]}"/>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td style="width:25%">
+
+                                            <label for="image_link" attrs="{'invisible': [('links', '!=', 'image')]}"/>
+                                        </td>
+                                        <td style="width:75%">
+                                            <field name="image_link" widget='image' attrs="{'invisible': [('links', '!=', 'image')]}"/>
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Who We Are">
+                                <field name="who_we_are_title" />
+                                <field name="who_we_are_description" />
+                            </group>
+
+                            <group string="vision">
+                                <field name="vision_title" />
+                                <field name="vision_description" />
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Mission">
+                                <field name="mission_title" />
+                                <field name="mission_description" />
+                            </group>
+
+                            <group string="Story">
+                                <field name="story_title" />
+                                <field name="story_description" />
+                            </group>
+                        </group>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="first_order_discount_view_form" model="ir.ui.view">
+            <field name="name">first_order_discount_view_form</field>
+            <field name="model">website.first.order</field>
+            <field name="arch" type="xml">
+                <form string="first_order_discount_form">
+                    <sheet>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <group>
+                            <field name="enable"/>
+                            <field name="discount_type"/>
+<!--                            <field name="percentage_discount"-->
+<!--                                   attrs="{'required': [('discount_type', '=', '1')],'invisible': [('discount_type', '!=', '1')]}"/>-->
+                            <field name="amount_discount"
+                            attrs="{'required': [('discount_type', '!=', '2')],'invisible': [('discount_type', '=', '2')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="website_first_order_discount_action" model="ir.actions.act_window">
+            <field name="name">First Order Discount</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">website.first.order</field>
+            <field name="view_mode">form</field>
+            <field name="res_id">1</field>
+        </record>
+        <menuitem id="website_first_order_discount_menu_item" name="First Order Discount" sequence="100"
+                  action="website_first_order_discount_action" parent="sale.product_menu_catalog"
+                   />
+    </data>
+</odoo>
