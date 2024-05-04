@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="company_zone_fees_form_inherit" model="ir.ui.view">
+            <field name="name">zone.zone</field>
+            <field name="model">zone.zone</field>
+            <field name="inherit_id" ref="das_zone_location.zone_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="delivery_fees" attrs="{'invisible': [('show_fee', '=', False)]}"/>
+                    <field name="show_fee" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="contact_us_view_form" model="ir.ui.view">
+            <field name="name">contact_us_view_form</field>
+            <field name="model">contact.us</field>
+            <field name="arch" type="xml">
+                <form string="contact_us_view_form" >
+
+                     <sheet>
+                         <group>
+                             <group>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                                <field name="comment"/>
+                                <field name="company_id"/>
+
+
+                            </group>
+
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="contact_us_view_tree" model="ir.ui.view">
+            <field name="name">contact_us_view_tree</field>
+            <field name="model">contact.us</field>
+            <field name="arch" type="xml">
+                <tree string="contact_us_tree" default_order="create_date desc">
+
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone" />
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="contact_us_action" model="ir.actions.act_window">
+            <field name="name">Contact Us</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">contact.us</field>
+              <!--<field name="res_id">1</field>-->
+
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="contact_us_menu_items" name="Contact Us" action="contact_us_action" parent="das_template_settings.contact_us_item" />
+<!--        <menuitem id="about_us_menu_items" name="About Us" action="about_us_action" parent="das_template_settings.about_us_menu_item"  />-->
+
+
+    </data>
+</odoo>
