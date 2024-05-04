@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="company_create_view" model="ir.ui.view">
+            <field name="name">Companies</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="company_create_inherit_tree" model="ir.ui.view">
+            <field name="name">Companies</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="company_create_inherit_kanban" model="ir.ui.view">
+            <field name="name">Companies</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_res_company_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_company_form_inherit_social_media_new" model="ir.ui.view">
+            <field name="name">res.company.form.inherit.social.media</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="social_media.view_company_form_inherit_social_media"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='social_media']" position="attributes">
+                    <attribute name="groups"></attribute>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
