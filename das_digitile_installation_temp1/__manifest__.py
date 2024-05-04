@@ -8,7 +8,7 @@
                 "das_publicfunction","das_delivery_system",
                 "das_delivery_item","das_delivery_time",
                 "das_user_notification","das_car_driver_ok",
-                "das_orders_trip", "das_zone_location",
+                "das_orders_trip",
 
                 # "das_images_attachment","das_sign_u_module",
                 # "das_categorygroups", "das_company_informations",
@@ -31,7 +31,7 @@
                 # "das_drivers_api","das_uninstall_trigger",
                 # 'das_user_login','das_res_config_settings',
 
-                # 'das_user_secure','das_user_owner',
+                # ,'das_user_owner',
                 # 'das_company_translate_name','das_website_banner_footer_promotion',
                 # 'das_company_informations_url','das_company_inherit',
                 # 'das_user_free_delivery','das_currency_inherit',
