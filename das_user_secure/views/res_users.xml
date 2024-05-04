@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="user_secure_form_inherit" model="ir.ui.view">
+            <field name="name">res.user</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='login']" position="after">
+                    <field name="user_admin" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="all_users_action_res_users" model="ir.actions.act_window">
+            <field name="name">Users</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.users</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="base.view_users_tree"/>
+            <field name="search_view_id" ref="base.view_users_search"/>
+            <field name="context">{'search_default_filter_no_share': 1, 'show_user_group_warning': True}</field>
+            <field name="domain">[('user_admin','=', False)]</field>
+            <field name="help">Create and manage users that will connect to the system. Users can be deactivated should
+                there be a period of time during which they will/should not connect to the system. You can assign them
+                groups in order to give them specific access to the applications they need to use in the system.
+            </field>
+        </record>
+
+        <record id="action_all_res_users_view1" model="ir.actions.act_window.view">
+            <field eval="10" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="base.view_users_tree"/>
+            <field name="act_window_id" ref="all_users_action_res_users"/>
+        </record>
+        <record id="action_all_res_users_view2" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="base.view_users_form"/>
+            <field name="act_window_id" ref="all_users_action_res_users"/>
+        </record>
+        <menuitem id="all_users_menu_item" name="Public Users" parent="base.menu_users"
+                  action="all_users_action_res_users"/>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_config_settings_view_form_inh" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.base.setup</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(base.action_res_users)d']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
