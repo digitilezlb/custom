@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="driver_chat_view_form" model="ir.ui.view">
+            <field name="name">driver_chat_view_form</field>
+            <field name="model">driver.chat</field>
+            <field name="arch" type="xml">
+                <form string="driver_chat_view_form" >
+
+                     <sheet>
+                         <group>
+                             <group>
+                                <field name="name"/>
+                                <field name="message"/>
+                                <field name="driver_user_id"/>
+                                <field name="client_user_id"/>
+
+                                <field name="image_found" invisible="1"/>
+                                <button name="show_image" string="Show Image" type="object" class="btn-primary" attrs="{'invisible':[('image_found','=',False)]}"/>
+<!--                                <button name="show_image" string="Show Image" type="object" class="btn-primary" />-->
+
+
+                            </group>
+                             <group>
+
+                             </group>
+
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="driver_chat_view_tree" model="ir.ui.view">
+            <field name="name">driver_chat_view_tree</field>
+            <field name="model">driver.chat</field>
+            <field name="arch" type="xml">
+                <tree string="contact_us_tree" default_order="create_date desc">
+
+                    <field name="name"/>
+                    <field name="message"/>
+                    <field name="driver_user_id"/>
+                    <field name="client_user_id"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="driver_chat_action" model="ir.actions.act_window">
+            <field name="name">Driver Chat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">driver.chat</field>
+              <!--<field name="res_id">1</field>-->
+
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="driver_chat_menu_items" name="Driver Chat" action="driver_chat_action"  parent="das_template_settings.driver_chat_item" />
+
+
+    </data>
+</odoo>
