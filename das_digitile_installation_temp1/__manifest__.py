@@ -4,8 +4,7 @@
     "summary": "DAS Digitile Installation Template 1",
     "version": "16.0.1.0.1",
     "author": "Das360",
-    "depends": ["sale_management",  "mrp", "das_digitile","das_template_settings",
-                "das_publicfunction","das_delivery_system",
+    "depends": ["sale_management","purchase",  "mrp", "web_site", "hr_expense",""
 
                 # "das_delivery_item","das_delivery_time",
                 # "das_user_notification","das_car_driver_ok",
