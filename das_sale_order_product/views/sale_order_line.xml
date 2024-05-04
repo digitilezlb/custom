@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_image_form" model="ir.ui.view">
+            <field name="name">order.image.view.form</field>
+            <field name="model">order.image</field>
+            <field name="arch" type="xml">
+<!--                <form string="Images">-->
+<!--                    <field name="sequence" invisible="1"/>-->
+<!--                    <div class="row o_website_sale_image_modal">-->
+<!--                        <div class="col-md-6 col-xl-7 text-center o_website_sale_image_modal_container">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col">-->
+<!--                                    <field name="image" widget="image"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+            </field>
+        </record>
+        <record id="image_view_kanban" model="ir.ui.view">
+            <field name="name">image.view.kanban</field>
+            <field name="model">order.image</field>
+            <field name="arch" type="xml">
+                <kanban string="Images" default_order="sequence">
+                    <field name="image"/>
+                    <field name="sequence" widget="handle"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="card oe_kanban_global_click p-0">
+                                <div class="o_squared_image">
+                                    <img class="card-img-top"
+                                         t-att-src="kanban_image('shipment.image', 'image', record.id.raw_value)"
+                                         t-att-alt="record.name.value"/>
+                                </div>
+                                <t t-if="record.image_1921.raw_value.length &lt; 100*1000">
+                                    <t t-set="size_status" t-value="'badge-success'"/>
+                                    <t t-set="message">Acceptable file size</t>
+                                </t>
+                                <t t-elif="record.image_1921.raw_value.length &lt; 1000*1000">
+                                    <t t-set="size_status" t-value="'badge-warning'"/>
+                                    <t t-set="message">Huge file size. The image should be optimized/reduced.</t>
+                                </t>
+                                <t t-else="1">
+                                    <t t-set="size_status" t-value="'badge-danger'"/>
+                                    <t t-set="message">Optimization required! Reduce the image size or increase your
+                                        compression settings.
+                                    </t>
+                                </t>
+                                <span t-attf-class="badge #{size_status} o_product_image_size"
+                                      t-esc="record.image_1920.value" t-att-title="message"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="preperation_button_sale_order" model="ir.ui.view">
+            <field name="name">sale.order.form.sale.stock</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='delivery_count']" position="attributes">
+                    <attribute name="string">Preparations</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_sale_order" model="ir.ui.view">
+            <field name="name">sale order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='warehouse_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    </xpath>
+                
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <!--<field name="zone_id"/>-->
+                    <field name="warehouse_id"/>
+                    <!--<field name="is_confirmed" readonly="1"/>-->
+                    </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']"
+                       position="after">
+<!--                    <field name="volume" digits="[10,4]"/>-->
+<!--					<field name="total_cbm" digits="[10,6]"/>-->
+                    <!--<field name="weight"/>-->
+                    <!--<field name="product_location"/>-->
+<!--                    <field name="is_picked"/>-->
+                </xpath>
+                <xpath expr="//field[@name='order_line']" position="after">
+<!--                    <label for="total_cbm">Total CBM</label>-->
+<!--                    <field name="total_cbm" digits="[10,6]"/>-->
+                    <!--<br/>-->
+                    <!--<label for="total_weight">Total Weight</label>-->
+                    <!--<field name="total_weight" digits="[10,4]"/>-->
+                    <!--<br/>-->
+<!--                    <label for="sugg_nb_boxes">Suggested Boxes Number</label>-->
+<!--                    <field name="sugg_nb_boxes"/>-->
+                    <!--<br/>-->
+                    <label for="total_line">Total Lines</label>
+                    <field name="total_line"/>
+                    <br/>
+                    <label for="total_qty">Total Quantity</label>
+                    <field name="total_qty"/>
+                </xpath>
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page string="Images">
+                        <group name="template_images" string="Images">
+                            <field name="images" nolabel="1" colspan="2">
+                                <kanban>
+                                    <field name="id"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="o_kanban_image">
+                                                    <img t-att-src="kanban_image('order.image', 'image', record.id.raw_value)"
+                                                         alt="Avatar"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+                <record id="view_quotation_tree_inherit" model="ir.ui.view">
+            <field name="name">Quotation</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <!--<field name="zone_id"/>-->
+                    <!-- Add new fields here -->
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

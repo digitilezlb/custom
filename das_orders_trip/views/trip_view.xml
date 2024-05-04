@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="order_trip_view_form" model="ir.ui.view">
+            <field name="name">order_trip_view_form</field>
+            <field name="model">orders.trip</field>
+            <field name="arch" type="xml">
+                <form string="order_trip_form" delete="0">
+                    <header>
+                        <button name='send_trip' string='Send Trip'
+                                class='oe_highlight'
+                                type='object'
+                                attrs="{'invisible': [('state', 'in', ('send', 'arrived'))]}"/>
+                        <field name="state" widget="statusbar"/>
+
+
+
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" invisible="1"/>
+                                <field name="reference"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="General Information">
+                                <field name="create_date" readonly="1"/>
+                                <field name="delivered_date" readonly="1"/>
+                            </group>
+                            <group string="Driver Information">
+                                <field name="driver_id" attrs="{'readonly': [('state', 'in', ('send', 'arrived'))]}"/>
+                                <field name="vehicle_id" domain="[('driver_id', '=', driver_id)]"
+                                       attrs="{'readonly': [('state', 'in', ('send', 'arrived'))]}"/>
+                            </group>
+
+                            <div style="text-align:right;" class="o_group_col_12">
+                                <div style="width:100%;margin:auto;height:100%;">
+                                    <field name="tracking_iframe"/>
+                                </div>
+
+                            </div>
+                            <div style="width:45%;">
+                                <field name="sale_list" invisible="1"/>
+
+                                <field name="order_ids"
+                                       attrs="{'readonly': [('state', 'in', ('send', 'arrived'))]}" domain="[('id','in',sale_list)]">
+                                    <tree default_order="sorting_inv">
+
+                                        <field name="sorting_inv" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="amount_total"/>
+
+                                        <field name="order_status"/>
+
+
+                                    </tree>
+                                </field>
+                                <div>
+                                    <button name="get_new_route" string="Draw Route" type="object" class="btn-primary"/>
+                                </div>
+                                <br/>
+                                <group>
+                                    <field name="total" readonly="1"/>
+                                    <field name="delivered_total" readonly="1"/>
+                                    <field name="rest_total" readonly="1"/>
+                                </group>
+                            </div>
+                        </group>
+
+
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="orders_trip_view_tree" model="ir.ui.view">
+            <field name="name">orders_trip_view_tree</field>
+            <field name="model">orders.trip</field>
+            <field name="arch" type="xml">
+                <tree string="orders_trip_tree" default_order="create_date desc" delete="0">
+                    <field name="reference"/>
+                    <field name="driver_id"/>
+                    <field name="vehicle_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="trip_search" model="ir.ui.view">
+            <field name="name">Trip</field>
+            <field name="model">orders.trip</field>
+            <field name="arch" type="xml">
+                <search string="Trip Orders">
+                    <field name="reference"/>
+                    <field name="vehicle_id"/>
+                    <field name="driver_id"/>
+                </search>
+            </field>
+        </record>
+        <record id="orders_trip_action" model="ir.actions.act_window">
+            <field name="name">Trip</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">orders.trip</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>
+<!--        <menuitem id="order_trip_menu_item" name="Trips" action="orders_trip_action"-->
+<!--                  web_icon="orders_trip,static/desription/icon.png"/>-->
+    </data>
+</odoo>

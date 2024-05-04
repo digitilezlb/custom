@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_category_inherit" model="ir.ui.view">
+            <field name="name">product.category</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="name_ar" placeholder="Arabic Name"/>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="before">
+<!--                    <field name="is_grocery" invisible="1"/>-->
+<!--                    <field name="is_main"/>-->
+                    <field name="is_publish"/>
+                    <field name="category_image" widget="image"/>
+                </xpath>
+<!--                <xpath expr="//sheet" position="before">-->
+<!--                    <header>-->
+<!--                        <button name="set_as_grocery_category" type="object"-->
+<!--                                string="Grocery Category"-->
+<!--                                class="oe_highlight"-->
+<!--                                confirm="This will set this category as grocery and all the other will be removed as grocery category"-->
+<!--                                attrs="{'invisible': [('is_grocery', '=', True)]}"/>-->
+<!--                    </header>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="places_repl_view_form" model="ir.ui.view">
+            <field name="name">places_repl_view_form</field>
+            <field name="model">places.replenishment</field>
+            <field name="arch" type="xml">
+                <form string="places_repl_form" create="false" edit="false">
+                    <sheet>
+                        <br/>
+                        <h1>
+                            <span style="font-weight: bolder">Places Replenishment</span>
+                        </h1>
+                        <br/>
+                        <group>
+                            <field name="location_id" domain="[('type', '=', 'unite_of_stock')]"/>
+                        </group>
+                        <notebook>
+                            <page string="Products">
+                                <field name="products">
+                                    <tree multi_edit="1" sample="1" editable="bottom">
+                                        <field name="product_id" readonly="1"/>
+                                        <field name="actual_quantity" readonly="1"/>
+                                        <field name="added_quantity"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button type='object' name='add_product_quantity' string='Add Quantity'
+                                    style="margin-left:85%" class="oe_highlight"/>
+                            <button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="places_rep_action" model="ir.actions.act_window">
+            <field name="name">Places Replenishment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">places.replenishment</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="places_repl" name="Places Replenishment" parent="stock.menu_action_location_form"
+                  action="places_rep_action"/>
+    </data>
+</odoo>

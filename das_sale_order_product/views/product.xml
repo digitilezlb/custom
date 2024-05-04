@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_inherit" model="ir.ui.view">
+            <field name="name">Product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+<!--                    <field name="unit_code" placeholder="1kg" attrs="{'required': [('detailed_type', '=', 'product')]}"/>-->
+                    <field name="detailed_type" invisible="1"/>
+<!--                    <field name="pack_of_id" attrs="{'required': [('detailed_type', '=', 'product')]}"/>-->
+<!--                    <field name="location_shelf" invisible="1"/>-->
+                    <field name="app_publish"/>
+                    <field name="new_bool" invisible="1"/>
+
+
+
+
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+         <record id="product_inherit_replinsh" model="ir.ui.view">
+            <field name="name">Product</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_update_quantity_on_hand']"  position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(stock.action_product_replenish)d']"  position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_inherit_replinsh_normal" model="ir.ui.view">
+            <field name="name">Product</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//button[@name='action_update_quantity_on_hand']"  position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//button[@name='%(stock.action_product_replenish)d']"  position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="product_product_inherit" model="ir.ui.view">
+            <field name="name">Product</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='additional_product_tag_ids']"  position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

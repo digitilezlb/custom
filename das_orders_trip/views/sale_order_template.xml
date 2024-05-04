@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_view_order_form_inherit12345" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                     <field name="order_status"  invisible="1"/>
+                     <field name="driver_id" options="{'no_create': True, 'no_create_edit': True}"
+                        attrs="{'readonly': [('order_status', 'in', ('6', '7'))]}" />
+                     <field name="order_time_to_be_ready"
+                        attrs="{'readonly': [('order_status', 'in', ('6', '7'))]}" />
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

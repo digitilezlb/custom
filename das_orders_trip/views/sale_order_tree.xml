@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_quotation_tree_inherit" model="ir.ui.view">
+            <field name="name">Quotation</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sale_order_type"/>
+                    <field name="order_status"/>
+                    <field name="driver_id"/>
+                    <field name="order_time_to_be_ready"/>
+                    <field name="assign_time_time"/>
+                    <!-- Add new fields here -->
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_sale_tree_inherit_dirver" model="ir.ui.view">
+            <field name="name">Sale</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sale_order_type"/>
+                    <field name="order_status"/>
+                    <field name="driver_id"/>
+                    <field name="order_time_to_be_ready"/>
+                    <field name="assign_time_time"/>
+                    <!-- Add new fields here -->
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
