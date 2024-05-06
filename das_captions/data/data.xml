@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="all_data_captions" model="das.caption">
+            <field name="drinks_caption">Drinks Caption</field>
+            <field name="sides_caption">Sides Caption</field>
+            <field name="related_caption">Related Caption</field>
+            <field name="liked_caption">Liked Caption</field>
+            <field name="desserts_caption">Dessert Caption</field>
+        </record>
+    </data>
+</odoo>

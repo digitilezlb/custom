@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="all_data" model="career.information">
+            <field name="name">Website Career Information</field>
+            <field name="title">Join our community</field>
+            <field name="vacancies_title">Open Vacancies</field>
+            <field name="vacancies_description">You Will Work In One Of Our Offices In Lebanon As Part Of Our Technical
+                Teams.
+            </field>
+            <field name="description">Our teams are small, flexible and responsive to quickly provide
+                customers with the solutions they need.
+            </field>
+        </record>
+
+        <record id="general_job" model="hr.job">
+            <field name="name">Curriculum vitae</field>
+            <field name="is_cv">True</field>
+        </record>
+    </data>
+</odoo>

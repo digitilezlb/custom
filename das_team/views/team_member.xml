@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_open_members_role" model="ir.actions.act_window">
+        <field name="name">Members</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_member','=', True)]</field>
+        <field name="context">{'default_is_member': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Member !
+            </p>
+        </field>
+    </record>
+    <menuitem id="team_member_menu_items" name="Team Members" action="action_open_members_role"
+              parent="das_template_settings.team_menu_item"/>
+
+    <record id="view_partner_member_form_inherit" model="ir.ui.view">
+        <field name="name">member.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+           
+
+            <xpath expr="//notebook/page[1]" position="before">
+                <page string="Member Information" name="member_information"
+                      default_focus="1" attrs="{'invisible': [('is_member', '=', False)]}">
+                    <group>
+                        <group string="Private Information">
+                            <field name="is_member" invisible="1"/>
+                            <field name="position"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="member_search" model="ir.ui.view">
+        <field name="name">member.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Members" name="member" domain="[('is_member','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

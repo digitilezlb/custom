@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_about_us_mission,about.us.mission,model_about_us_mission,,1,1,1,1
+
