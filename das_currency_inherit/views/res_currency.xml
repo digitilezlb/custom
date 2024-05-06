@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="currency_create_view" model="ir.ui.view">
+            <field name="name">Currencies</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">0</attribute>
+
+                </xpath>
+
+            </field>
+
+        </record>
+
+        <record id="currency_create_inherit_tree" model="ir.ui.view">
+            <field name="name">Currencies</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="currency_create_inherit_kanban" model="ir.ui.view">
+            <field name="name">Currencies</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
