@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="company_deal_form_inherit" model="ir.ui.view">
+            <field name="name">res.company</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//notebook" position="inside">
+
+                    <page string="Deal">
+                        <group>
+                            <group>
+                                <field name="deal_title1"  />
+                                <field name="deal_title2"  />
+                                <field name="deal_banner" widget='image' style="width:40%;" />
+                                <field name="deal_background" widget='image' style="width:40%;" />
+                            </group>
+                        </group>
+                    </page>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

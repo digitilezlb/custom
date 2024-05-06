@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="price_list_variant_view_form" model="ir.ui.view">
+            <field name="name">price_list_variant_view_form</field>
+            <field name="model">price.list.variant</field>
+            <field name="arch" type="xml">
+                <form string="price_list_variant_form">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <label for="is_published" string="Published"/>
+                            <field name="is_published"/><br/>
+                        <label for="company_id" string="Company"/>
+                        <field name="company_id"/>
+                        <notebook>
+<!--                            <page string="Details">-->
+<!--                                <field name="detail_fields">-->
+<!--                                    <tree>-->
+<!--                                        <field name="products"/>-->
+<!--                                        <field name="discount"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+
+                            <page string="Details" name="price_list_variant_detail">
+                                <field name="detail_fields">
+                                    <tree string="Product lines" editable="bottom">
+
+                                        <field name="product_id" required="1"/>
+                                        <field name="discount" required="1"/>
+
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="price_list_variant_view_tree" model="ir.ui.view">
+            <field name="name">price_list_variant_view_tree</field>
+            <field name="model">price.list.variant</field>
+            <field name="arch" type="xml">
+                <tree string="price_list_variant_tree">
+                    <field name="name"/>
+                    <field name="is_published"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_price_list_variant" model="ir.actions.act_window">
+            <field name="name">Pricelist Variant</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">price.list.variant</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="menu_item_price_list_variant" name="Pricelist Variant" action="action_price_list_variant"-->
+<!--                  />-->
+<!--         <menuitem id="root_rice_list_variants" name="Producs Variants Discount"  />-->
+         <menuitem id="root_price_list_variants" name="Product Variants Discount" parent="sale.sale_menu_root"/>
+        <menuitem id="menu_item_price_list_variant" name="Product Variants Discount" parent="root_price_list_variants"
+                  action="action_price_list_variant"/>
+
+    </data>
+</odoo>

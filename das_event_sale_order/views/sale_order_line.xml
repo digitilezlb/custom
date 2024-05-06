@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_view_order_detail_form_event" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='order_line']//tree//field[@name='price_total']" position="after">
+                     <field name="image_found" invisible="1"/>
+                     <button name="show_image" string="Show Image" type="object" class="btn-primary" attrs="{'invisible':[('image_found','=',False)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

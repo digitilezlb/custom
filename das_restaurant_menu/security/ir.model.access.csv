@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_das_menu,das.menu,model_das_menu,,1,1,1,1
+access_das_menu_type,das.menu.type,model_das_menu_type,,1,1,1,1
+access_das_category_menu,das.category.menu,model_das_category_menu,,1,1,1,1

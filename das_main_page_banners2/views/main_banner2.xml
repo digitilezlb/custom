@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="main_banner2_view_form" model="ir.ui.view">
+            <field name="name">main_banner2_view_form</field>
+            <field name="model">main.banner2</field>
+            <field name="arch" type="xml">
+                <form string="main_banner2_view_form">
+<!--                    <header>-->
+<!--                        <button name="set_as_publish" string="Publish as Taste The Difference" type="object" class="btn-primary"/>-->
+<!--                        <button name="set_as_publish_as_recommended" string="Publish as Recommended Items" type="object" class="btn-primary"/>-->
+
+<!--                        <button name="set_as_unpublish" string="Unpublish" type="object" class="btn-primary"/>-->
+<!--                    </header>-->
+                     <sheet>
+                         <group>
+                             <group>
+                                 <field name="name" placeholder="title"/>
+                                  <field name="description" placeholder="description"/>
+                                  <field name="company_id" />
+                                  <field name="banner_url" widget="url"/>
+                             </group>
+
+                             <group>
+                                <field name="banner_image" widget="image"/>
+                             </group>
+
+                         </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="main_banner2_view_tree" model="ir.ui.view">
+            <field name="name">main_banner2_view_tree</field>
+            <field name="model">main.banner2</field>
+            <field name="arch" type="xml">
+                <tree string="main_banner2_tree">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="company_id" />
+                    <field name="banner_url" widget="url"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="main_banner2_tree_action" model="ir.actions.act_window">
+            <field name="name">Main banners 1</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">main.banner2</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="main_banner2_menu_items" name="Main banners 1" action="main_banner2_tree_action" parent="das_template_settings.main_banner_menu_item"/>
+<!--        <menuitem id="taste_the_difference_menu_items" name="Taste The Difference" action="taste_the_differences_tree_action"-->
+<!--                  web_icon=""/>-->
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

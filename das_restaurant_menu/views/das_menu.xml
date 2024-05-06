@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="das_menu_view_form" model="ir.ui.view">
+            <field name="name">das_menu_view_form</field>
+            <field name="model">das.menu</field>
+            <field name="arch" type="xml">
+                <form string="das_menu_form">
+                    <header>
+                        <button name="set_as_web_menu" string="Web Menu" type="object" class="btn-primary"/>
+                    </header>
+                     <sheet>
+                         <group>
+                            <group>
+                                <field name="name" placeholder="name"/>
+                                <field name="type_id"/>
+                                <field name="qr_code"/>
+                                <field name="company_id"/>
+<!--                                <field name="is_web_menu"/>-->
+                            </group>
+                        </group>
+                         <group>
+                            <group>
+                                <field name="menu_banner" widget="image"/>
+
+                            </group>
+                        </group>
+                         <notebook>
+                            <page string="Categories">
+                                <field name="categories"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="das_menu_view_tree" model="ir.ui.view">
+            <field name="name">das_menu_view_tree</field>
+            <field name="model">das.menu</field>
+            <field name="arch" type="xml">
+                <tree string="das_menu_tree">
+                    <field name="name"/>
+                    <field name="company_id" />
+                    <field name="type_id"/>
+                    <field name="is_web_menu"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="das_menu_tree_action" model="ir.actions.act_window">
+            <field name="name">Menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">das.menu</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="das_menu_menu_items" name="Restaurant Menu" action="das_menu_tree_action" parent="das_template_settings.main_section_menu_item" sequence="3"/>
+
+<!--        <menuitem id="taste_the_difference_menu_items" name="Taste The Difference" action="taste_the_differences_tree_action"-->
+<!--                  web_icon=""/>-->
+
+
+
+
+
+
+
+
+    </data>
+</odoo>
