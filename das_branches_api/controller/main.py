@@ -736,7 +736,7 @@ class BranchesAPI(http.Controller):
                                 "id": line.product_id.id,
                                 "name": line.product_id.name,
                                 "description": desc,
-                                "kitchen_note": line.product_id.kitchen_notes if line.product_id.kitchen_notes else "",
+                                "kitchen_note": line.kitchen_notes if line.kitchen_notes else "",
                                 "image": "/web/content/" + str(
                                     line.product_id.image_attachment.id) if line.product_id.image_attachment.id else "",
                                 # "price": Product_Info.get_product_product_price(line.product_id),
